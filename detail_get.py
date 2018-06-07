@@ -36,11 +36,9 @@ def parse_detial(name, room_id):
 			room['room_id'] = room_id
 			if 'area' in item.keys():
 				room['area'] = item['area']
-				print(len(item['area']))
-				print('2')
 			else:
 				room['area'] = 'area'
-				print('1')
+				
 			#print(room['area'])
 			if 'bed' in item.keys():
 				room['bed'] = item['bed']
