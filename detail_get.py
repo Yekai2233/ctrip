@@ -21,12 +21,9 @@ def parse_detial(name, room_id):
 	url = 'http://m.ctrip.com/webapp/Hotel/HotelDetail/'+ str(room_id) + '.html' 
 	aspx = requests.post(url, headers=headers)
 
-
 	#print(aspx.text)
 	data = re.compile(r'__HOTEL_PAGE_DATA__\s=\s(.*?);\s*var', re.S).findall(aspx.text)[0]
 
-	with open ('F:/3.html', 'wb') as f:
-		f.write(data.encode('utf-8'))
 	room_list = []
 
 	json_data = json.loads(data)
@@ -39,14 +36,17 @@ def parse_detial(name, room_id):
 			room['room_id'] = room_id
 			if 'area' in item.keys():
 				room['area'] = item['area']
+				print(len(item['area']))
+				print('2')
 			else:
 				room['area'] = 'area'
-				#print(item['area'])
+				print('1')
+			#print(room['area'])
 			if 'bed' in item.keys():
 				room['bed'] = item['bed']
 			else:
 				room['bed'] = 'bed'
-
+			#print(room['bed'])
 			if 'bname' in item.keys():
 				room['bname'] = item['bname']
 			else:
@@ -73,15 +73,6 @@ def parse_detial(name, room_id):
 			room_list.append(room)
 			
 	return room_list
-
-
-"""for i in room_list:
-	cursor = db.cursor() 
-	cursor.execute("INSERT ignore INTO ctriphangzhou(room_id, area, bed, bname, floor, maxNum, price, time) VALUES (%s, %s, %s, %s, %s, %s, %s)" ,(i['room_id'], i['area'], i['bed'], i['bname'], i['floor'], i['maxNum'], i['price'], i['time']))
-db.commit()
-cursor.close()	"""
-
-
 
 
 def main():
@@ -124,6 +115,11 @@ def main():
 
 if __name__ == '__main__':
 	main()
+
+
+
+
+
 '''print(aspx.status_code)
 print(url)
 html = etree.HTML(aspx.text)
