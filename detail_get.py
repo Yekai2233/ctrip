@@ -30,9 +30,7 @@ def parse_detial(name, room_id):
 	if json_data and 'roomlistinfo' in json_data.keys():
 		for item in json_data['roomlistinfo']['rooms']:
 			room = {}
-			#print(item)
-			
-			room['time'] =  time.strftime("%Y-%m-%d %X", time.localtime())
+			room['time'] = time.strftime("%Y-%m-%d %X", time.localtime())
 			room['room_id'] = room_id
 			if 'area' in item.keys():
 				room['area'] = item['area']
